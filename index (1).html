@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS — شبكة الخبرات البشرية</title>
+<meta name="description" content="NEXUS — الرابط بين عقول البشر. أكبر شبكة خبرات بشرية في العالم.">
+<meta property="og:title" content="NEXUS — شبكة الخبرات البشرية">
+<meta property="og:description" content="بدل ما تدخل للترفيه، ادخل لتتعلم، تساعد، وتأخذ خبرة من الآخرين.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="cover.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07070f;
+    --bg2: #0f0f1e;
+    --bg3: #14142a;
+    --purple: #6c5ce7;
+    --purple-light: #a29bfe;
+    --purple-dim: #2d2660;
+    --teal: #00cec9;
+    --teal-dim: #004f4e;
+    --amber: #fdcb6e;
+    --text: #f0eeff;
+    --text-muted: #8888aa;
+    --border: rgba(108,92,231,0.2);
+    --border2: rgba(255,255,255,0.07);
+    --card: rgba(255,255,255,0.03);
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+  /* ─── NAVBAR ─── */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 40px;background:rgba(7,7,15,0.85);backdrop-filter:blur(16px);border-bottom:0.5px solid var(--border2)}
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo-icon{width:36px;height:36px;border-radius:10px;background:var(--purple);display:flex;align-items:center;justify-content:center}
+  .logo-icon svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2}
+  .logo-text{font-size:20px;font-weight:700;letter-spacing:4px;color:var(--text)}
+  .nav-links{display:flex;align-items:center;gap:28px}
+  .nav-links a{color:var(--text-muted);text-decoration:none;font-size:14px;transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  .nav-cta{background:var(--purple);color:#fff;padding:9px 22px;border-radius:25px;font-size:14px;font-weight:600;text-decoration:none;transition:opacity .2s}
+  .nav-cta:hover{opacity:.85}
+
+  /* ─── HERO ─── */
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg::before{content:'';position:absolute;top:10%;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(108,92,231,0.18) 0%,transparent 70%)}
+  .hero-bg::after{content:'';position:absolute;bottom:0;right:10%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,206,201,0.1) 0%,transparent 70%)}
+  .hero-content{position:relative;z-index:1;max-width:720px}
+  .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(108,92,231,0.15);border:0.5px solid rgba(108,92,231,0.4);border-radius:25px;padding:6px 16px;font-size:12px;color:var(--purple-light);margin-bottom:28px}
+  .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--purple-light);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .hero h1{font-size:clamp(42px,7vw,82px);font-weight:900;line-height:1.1;margin-bottom:24px;letter-spacing:-1px}
+  .hero h1 .line1{display:block;color:var(--text)}
+  .hero h1 .accent{color:var(--purple-light)}
+  .hero p{font-size:17px;color:var(--text-muted);line-height:1.8;max-width:520px;margin:0 auto 40px}
+  .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn-primary{background:var(--purple);color:#fff;padding:14px 32px;border-radius:30px;font-size:15px;font-weight:600;text-decoration:none;transition:transform .2s,opacity .2s;display:inline-flex;align-items:center;gap:8px}
+  .btn-primary:hover{transform:translateY(-2px);opacity:.9}
+  .btn-ghost{background:transparent;color:var(--text);padding:14px 32px;border-radius:30px;font-size:15px;border:0.5px solid var(--border2);text-decoration:none;transition:border-color .2s,background .2s;display:inline-flex;align-items:center;gap:8px}
+  .btn-ghost:hover{background:var(--card);border-color:rgba(255,255,255,.2)}
+  .hero-stats{display:flex;gap:48px;justify-content:center;margin-top:64px;flex-wrap:wrap}
+  .stat{text-align:center}
+  .stat .num{font-size:32px;font-weight:700;color:var(--text)}
+  .stat .lbl{font-size:12px;color:var(--text-muted);margin-top:4px}
+
+  /* ─── SECTIONS ─── */
+  section{padding:96px 24px;max-width:1100px;margin:0 auto}
+  .section-label{font-size:11px;font-weight:600;letter-spacing:3px;color:var(--purple-light);text-transform:uppercase;margin-bottom:12px}
+  .section-title{font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--text);margin-bottom:16px;line-height:1.2}
+  .section-sub{font-size:16px;color:var(--text-muted);line-height:1.7;max-width:540px}
+
+  /* ─── HOW IT WORKS ─── */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:52px}
+  .step-card{background:var(--card);border:0.5px solid var(--border2);border-radius:var(--radius);padding:28px;position:relative;overflow:hidden;transition:border-color .3s}
+  .step-card:hover{border-color:var(--border)}
+  .step-card::before{content:'';position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle at top right,rgba(108,92,231,0.1),transparent);border-radius:0 var(--radius) 0 80px}
+  .step-num{font-size:48px;font-weight:900;color:rgba(108,92,231,0.2);line-height:1;margin-bottom:16px}
+  .step-icon{width:44px;height:44px;background:var(--purple-dim);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .step-icon svg{width:22px;height:22px;fill:none;stroke:var(--purple-light);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .step-card h3{font-size:16px;font-weight:600;margin-bottom:8px;color:var(--text)}
+  .step-card p{font-size:13px;color:var(--text-muted);line-height:1.65}
+
+  /* ─── FEATURES ─── */
+  .features-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border2);border-radius:var(--radius);overflow:hidden;margin-top:52px}
+  .feat{background:var(--bg2);padding:36px;transition:background .3s}
+  .feat:hover{background:var(--bg3)}
+  .feat-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+  .feat-icon.p{background:var(--purple-dim)}
+  .feat-icon.t{background:var(--teal-dim)}
+  .feat-icon svg{width:24px;height:24px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .feat-icon.p svg{stroke:var(--purple-light)}
+  .feat-icon.t svg{stroke:var(--teal)}
+  .feat h3{font-size:17px;font-weight:600;margin-bottom:8px}
+  .feat p{font-size:13px;color:var(--text-muted);line-height:1.7}
+  .feat-big{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .feat-big .feat-visual{background:var(--bg3);border-radius:var(--radius-sm);padding:24px;border:0.5px solid var(--border2)}
+  .chat-bubble{background:var(--purple-dim);border-radius:12px 12px 4px 12px;padding:12px 16px;font-size:13px;color:var(--purple-light);margin-bottom:10px;max-width:85%;line-height:1.5}
+  .chat-bubble.ai{background:rgba(0,206,201,0.08);border:0.5px solid rgba(0,206,201,0.2);border-radius:4px 12px 12px 12px;color:var(--teal);margin-right:auto}
+  .chat-label{font-size:10px;color:var(--text-muted);margin-bottom:4px}
+
+  /* ─── POINTS ─── */
+  .points-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:48px;justify-content:center}
+  .point-card{background:var(--card);border:0.5px solid var(--border2);border-radius:var(--radius);padding:28px 32px;text-align:center;flex:1;min-width:180px;transition:border-color .3s,transform .3s}
+  .point-card:hover{border-color:var(--border);transform:translateY(-4px)}
+  .point-emoji{font-size:36px;margin-bottom:12px}
+  .point-card h3{font-size:15px;font-weight:600;margin-bottom:6px}
+  .point-card p{font-size:12px;color:var(--text-muted)}
+
+  /* ─── CATEGORIES ─── */
+  .cats{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
+  .cat-pill{display:flex;align-items:center;gap:8px;background:var(--card);border:0.5px solid var(--border2);border-radius:25px;padding:10px 20px;font-size:14px;color:var(--text-muted);cursor:pointer;transition:all .25s}
+  .cat-pill:hover{background:var(--purple-dim);border-color:var(--purple);color:var(--text)}
+  .cat-pill .cat-emoji{font-size:18px}
+
+  /* ─── CTA ─── */
+  .cta-section{text-align:center;padding:96px 24px;background:var(--bg2);border-top:0.5px solid var(--border2);border-bottom:0.5px solid var(--border2);position:relative;overflow:hidden}
+  .cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(108,92,231,0.12) 0%,transparent 70%)}
+  .cta-section h2{font-size:clamp(28px,4vw,48px);font-weight:800;margin-bottom:16px;position:relative}
+  .cta-section p{font-size:16px;color:var(--text-muted);margin-bottom:36px;position:relative}
+
+  /* ─── FOOTER ─── */
+  footer{text-align:center;padding:32px;color:var(--text-muted);font-size:13px;border-top:0.5px solid var(--border2)}
+  footer span{color:var(--purple-light)}
+
+  /* ─── PHONE MOCKUP ─── */
+  .phone-wrap{display:flex;justify-content:center;margin-top:52px}
+  .phone-frame{width:280px;background:var(--bg2);border-radius:36px;border:1.5px solid rgba(108,92,231,0.35);overflow:hidden;box-shadow:0 0 60px rgba(108,92,231,0.15)}
+  .phone-status{background:var(--bg);padding:12px 20px;display:flex;justify-content:space-between;font-size:11px;color:#555}
+  .phone-status .t{color:#aaa}
+  .phone-screen{padding:0}
+  .pscreen-header{background:var(--bg);padding:20px 18px 16px}
+  .pnexus{display:flex;align-items:center;gap:7px;margin-bottom:14px}
+  .pnexus .pi{width:28px;height:28px;background:var(--purple);border-radius:8px;display:flex;align-items:center;justify-content:center}
+  .pnexus .pi svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:2}
+  .pnexus span{font-size:16px;font-weight:700;letter-spacing:3px;color:var(--text)}
+  .psearch{background:rgba(255,255,255,0.06);border-radius:10px;padding:9px 13px;font-size:12px;color:#555}
+  .psection{padding:10px 18px 6px;font-size:10px;color:#555;letter-spacing:1px;text-transform:uppercase}
+  .pcard{margin:0 14px 8px;background:rgba(255,255,255,0.03);border-radius:12px;padding:13px;border:0.5px solid rgba(255,255,255,0.06)}
+  .pcard-top{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+  .pavatar{width:30px;height:30px;border-radius:50%;background:var(--purple-dim);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--purple-light);flex-shrink:0}
+  .pcard h4{font-size:11px;font-weight:600;color:var(--text)}
+  .pcard p{font-size:10px;color:#555}
+  .ptags{display:flex;gap:4px;margin-top:6px}
+  .ptag{font-size:9px;padding:2px 7px;border-radius:5px;border:0.5px solid rgba(255,255,255,0.08);color:#666}
+  .pnav{background:var(--bg);border-top:0.5px solid rgba(255,255,255,0.06);display:flex;justify-content:space-around;padding:8px 0 12px}
+  .pnavbtn{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .pnavbtn svg{width:18px;height:18px;fill:none;stroke:#444;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .pnavbtn.active svg{stroke:var(--purple-light)}
+  .pnavbtn span{font-size:8px;color:#444}
+  .pnavbtn.active span{color:var(--purple-light)}
+
+  /* ─── RESPONSIVE ─── */
+  @media(max-width:768px){
+    nav{padding:14px 20px}
+    .nav-links{display:none}
+    .features-grid{grid-template-columns:1fr}
+    .feat-big{grid-column:auto;grid-template-columns:1fr}
+    .feat-big .feat-visual{display:none}
+    section{padding:64px 20px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/><line x1="5.6" y1="5.6" x2="8.5" y2="8.5"/><line x1="15.5" y1="15.5" x2="18.4" y2="18.4"/><line x1="18.4" y1="5.6" x2="15.5" y2="8.5"/><line x1="8.5" y1="15.5" x2="5.6" y2="18.4"/></svg>
+    </div>
+    <span class="logo-text">NEXUS</span>
+  </div>
+  <div class="nav-links">
+    <a href="#how">كيف يعمل</a>
+    <a href="#features">المميزات</a>
+    <a href="#categories">الأقسام</a>
+  </div>
+  <a href="#cta" class="nav-cta">ابدأ الآن</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      الرابط بين عقول البشر
+    </div>
+    <h1>
+      <span class="line1">تعلم من</span>
+      <span class="accent">تجارب حقيقية</span>
+    </h1>
+    <p>بدل ما تدخل التطبيقات للترفيه، ادخل لتتعلم، تساعد، وتأخذ خبرة من ناس عاشوا نفس تجربتك.</p>
+    <div class="hero-btns">
+      <a href="#how" class="btn-primary">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+        اكتشف NEXUS
+      </a>
+      <a href="#features" class="btn-ghost">شاهد المميزات</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="num">٢٤٧+</div><div class="lbl">خبرة تُضاف يومياً</div></div>
+      <div class="stat"><div class="num">٧</div><div class="lbl">أقسام متخصصة</div></div>
+      <div class="stat"><div class="num">AI</div><div class="lbl">يلخص ويربط التجارب</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how" style="max-width:1100px;margin:0 auto">
+  <div class="section-label">كيف يعمل</div>
+  <div class="section-title">٤ خطوات بس</div>
+  <p class="section-sub">من أول ما تفتح التطبيق حتى تحصل على إجابة حقيقية من ناس عاشوا نفس تجربتك.</p>
+  <div class="steps">
+    <div class="step-card">
+      <div class="step-num">١</div>
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      </div>
+      <h3>اختر اهتماماتك</h3>
+      <p>أول مرة تدخل، تختار عمرك وما تعرفه وما تريد تتعلمه. التطبيق يبني تجربتك الخاصة.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">٢</div>
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+      </div>
+      <h3>اطرح سؤالك</h3>
+      <p>اكتب سؤالك وNEXUS AI يحلله ويرسله للأشخاص المناسبين اللي عندهم نفس تجربتك.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">٣</div>
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      </div>
+      <h3>احصل على إجابات</h3>
+      <p>تجمع الإجابات من ناس حقيقيين وNEXUS AI يلخصها لك بشكل واضح ومرتب.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">٤</div>
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <h3>ساعد واربح نقاط</h3>
+      <p>تظهر لك أسئلة تناسب معرفتك. تجاوب وتحصل على نقاط تأثير ويرتفع مستواك.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" style="max-width:1100px;margin:0 auto">
+  <div class="section-label">المميزات</div>
+  <div class="section-title">مش تطبيق عادي</div>
+  <p class="section-sub">كل ميزة في NEXUS مصممة عشان تجعل الخبرة البشرية في متناول الجميع.</p>
+  <div class="features-grid">
+    <div class="feat">
+      <div class="feat-icon p">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <h3>اسأل المستقبل ⏳</h3>
+      <p>اكتب "أنا عمري ١٦ وأريد أعرف ماذا أفعل" ويجيبك أشخاص مروا بنفس المرحلة بالضبط.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon t">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      </div>
+      <h3>NEXUS AI</h3>
+      <p>الذكاء الاصطناعي يفهم سؤالك، يجد أفضل ناس، ويلخص التجارب. البشر هم البطل وهو الوسيط.</p>
+    </div>
+    <div class="feat feat-big">
+      <div>
+        <div class="feat-icon p">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <h3>ملف شخصي فريد</h3>
+        <p style="color:var(--text-muted);font-size:13px;line-height:1.7;margin-bottom:16px">مش مثل إنستغرام. فيه ما تعرفه، ما تتعلمه، ومستوى خبرتك بناءً على الفائدة اللي قدمتها للمجتمع — مش على اللايكات.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="background:var(--purple-dim);color:var(--purple-light);padding:5px 14px;border-radius:20px;font-size:12px">برمجة</span>
+          <span style="background:var(--teal-dim);color:var(--teal);padding:5px 14px;border-radius:20px;font-size:12px">✦ أتعلم: لغة</span>
+          <span style="background:rgba(253,203,110,0.1);color:var(--amber);padding:5px 14px;border-radius:20px;font-size:12px">★ خبير نشط</span>
+        </div>
+      </div>
+      <div class="feat-visual">
+        <div class="chat-label">سؤال المستخدم</div>
+        <div class="chat-bubble">كيف أبدأ مشروعاً صغيراً بدون رأس مال؟</div>
+        <div class="chat-label" style="margin-top:14px">NEXUS AI</div>
+        <div class="chat-bubble ai">وجدت ١٤ شخصاً مروا بنفس تجربتك — ٣ منهم بدأوا من الصفر وحققوا نتائج. أرسل سؤالك إليهم...</div>
+      </div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon p">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <h3>مجتمع حقيقي</h3>
+      <p>ناس حقيقيون بتجارب حقيقية. مش محتوى مصطنع أو إعلانات. كل إجابة جاءت من شخص عاش اللحظة.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon t">
+        <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      </div>
+      <h3>نظام نقاط ذكي</h3>
+      <p>✨ نقطة معرفة &nbsp; 🤝 نقطة مساعدة &nbsp; 💡 نقطة فكرة. كلما ساعدت أكثر ارتفعت رتبتك.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PHONE MOCKUP SECTION -->
+<section style="text-align:center;max-width:1100px;margin:0 auto">
+  <div class="section-label">المظهر</div>
+  <div class="section-title">شكل التطبيق</div>
+  <p class="section-sub" style="margin:0 auto">تصميم مستقبلي هادئ، يعطيك إحساس الذكاء والتقنية مع سهولة الاستخدام.</p>
+  <div class="phone-wrap">
+    <div class="phone-frame">
+      <div class="phone-status"><span class="t">٩:٤١</span><span>NEXUS</span><span>●●● 5G</span></div>
+      <div class="phone-screen">
+        <div class="pscreen-header">
+          <div class="pnexus">
+            <div class="pi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/></svg></div>
+            <span>NEXUS</span>
+          </div>
+          <div class="psearch">🔍 ماذا تريد أن تعرف؟</div>
+        </div>
+        <div class="psection">تجارب تناسبك</div>
+        <div class="pcard">
+          <div class="pcard-top">
+            <div class="pavatar">مح</div>
+            <div><div class="pcard h4" style="padding:0;margin:0;background:none;border:none">كيف تعلمت برمجة من الصفر</div></div>
+          </div>
+          <p class="pcard" style="padding:0;background:none;border:none;font-size:10px;color:#555;margin:0">٣ إجابات من ناس مروا بنفس التجربة</p>
+          <div class="ptags"><span class="ptag">برمجة</span><span class="ptag">تطوير</span></div>
+        </div>
+        <div class="pcard">
+          <div class="pcard-top">
+            <div class="pavatar" style="background:rgba(0,206,201,0.12);color:var(--teal)">سا</div>
+            <div><div class="pcard h4" style="padding:0;margin:0;background:none;border:none">⏳ اسأل المستقبل</div></div>
+          </div>
+          <p class="pcard" style="padding:0;background:none;border:none;font-size:10px;color:#555;margin:0">أنا عمري ١٧ وأريد أعرف ماذا أفعل</p>
+          <div class="ptags"><span class="ptag">مستقبل</span><span class="ptag">شباب</span></div>
+        </div>
+      </div>
+      <div class="pnav">
+        <div class="pnavbtn active">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>الرئيسية</span>
+        </div>
+        <div class="pnavbtn">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+          <span>استكشف</span>
+        </div>
+        <div class="pnavbtn">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          <span>اسأل</span>
+        </div>
+        <div class="pnavbtn">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>ملفي</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section id="categories" style="max-width:1100px;margin:0 auto">
+  <div class="section-label">الأقسام</div>
+  <div class="section-title">كل جانب من حياتك</div>
+  <p class="section-sub">٧ أقسام تغطي كل ما تحتاجه من تجارب وخبرات.</p>
+  <div class="cats">
+    <div class="cat-pill"><span class="cat-emoji">🧑‍🎓</span> الدراسة</div>
+    <div class="cat-pill"><span class="cat-emoji">💼</span> العمل</div>
+    <div class="cat-pill"><span class="cat-emoji">💰</span> المال</div>
+    <div class="cat-pill"><span class="cat-emoji">🎨</span> الإبداع</div>
+    <div class="cat-pill"><span class="cat-emoji">🛠️</span> المهارات</div>
+    <div class="cat-pill"><span class="cat-emoji">❤️</span> الحياة</div>
+    <div class="cat-pill"><span class="cat-emoji">🌱</span> تطوير النفس</div>
+  </div>
+</section>
+
+<!-- POINTS -->
+<section style="max-width:1100px;margin:0 auto;text-align:center">
+  <div class="section-label">نظام النقاط</div>
+  <div class="section-title">بدل اللايك، نقاط تأثير</div>
+  <p class="section-sub" style="margin:0 auto">قيمتك مش بعدد متابعيك، بالفائدة اللي قدمتها للناس.</p>
+  <div class="points-row">
+    <div class="point-card">
+      <div class="point-emoji">✨</div>
+      <h3>نقطة معرفة</h3>
+      <p>لما تشارك خبرة أو تجربة مفيدة</p>
+    </div>
+    <div class="point-card">
+      <div class="point-emoji">🤝</div>
+      <h3>نقطة مساعدة</h3>
+      <p>لما تجاوب على سؤال بشكل مفيد</p>
+    </div>
+    <div class="point-card">
+      <div class="point-emoji">💡</div>
+      <h3>نقطة فكرة</h3>
+      <p>لما تقدم منظور أو فكرة جديدة للمجتمع</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section" id="cta">
+  <h2>جاهز تنضم لـ NEXUS؟</h2>
+  <p>آلاف من الناس ينتظرون يتعلمون من تجربتك.</p>
+  <button onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})" class="btn-primary" style="display:inline-flex;border:none;cursor:pointer;font-family:'Cairo',sans-serif;font-size:15px">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+    ابدأ الآن — مجاناً
+  </button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  تصميم وبرمجة &nbsp;<span>ريتاج فارس الأحمد</span>&nbsp; ♥ &nbsp;|&nbsp; <span>NEXUS</span> — الرابط بين عقول البشر
+</footer>
+
+</body>
+</html>
