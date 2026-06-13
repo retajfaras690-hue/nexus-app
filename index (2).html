@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS — شبكة الخبرات البشرية</title>
+<meta name="description" content="NEXUS — الرابط بين عقول البشر. أكبر شبكة خبرات بشرية في العالم.">
+<meta property="og:title" content="NEXUS — شبكة الخبرات البشرية">
+<meta property="og:description" content="بدل ما تدخل للترفيه، ادخل لتتعلم، تساعد، وتأخذ خبرة من الآخرين.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="cover.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07070f;--bg2:#0f0f1e;--bg3:#14142a;
+  --purple:#6c5ce7;--purple-light:#a29bfe;--purple-dim:#2d2660;
+  --teal:#00cec9;--teal-dim:#004f4e;--amber:#fdcb6e;
+  --text:#f0eeff;--text-muted:#8888aa;
+  --border:rgba(108,92,231,0.25);--border2:rgba(255,255,255,0.07);
+  --card:rgba(255,255,255,0.03);--radius:16px;--radius-sm:10px;
+  --transition:0.25s ease;
+}
+.light{
+  --bg:#f4f3ff;--bg2:#ffffff;--bg3:#eceaff;
+  --text:#1a1040;--text-muted:#6655bb;
+  --border:rgba(108,92,231,0.3);--border2:rgba(108,92,231,0.12);
+  --card:rgba(108,92,231,0.04);
+}
+*{box-sizing:border-box;margin:0;padding:0;transition:background var(--transition),color var(--transition),border-color var(--transition)}
+html{scroll-behavior:smooth}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:rgba(7,7,15,0.88);backdrop-filter:blur(18px);border-bottom:0.5px solid var(--border2)}
+.light nav{background:rgba(244,243,255,0.92)}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-icon{width:34px;height:34px;border-radius:9px;background:var(--purple);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round}
+.logo-text{font-size:19px;font-weight:700;letter-spacing:4px;color:var(--text)}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:14px;cursor:pointer}
+.nav-links a:hover{color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.theme-btn{background:var(--card);border:0.5px solid var(--border2);border-radius:25px;padding:7px 14px;color:var(--text-muted);cursor:pointer;font-size:13px;font-family:'Cairo',sans-serif;display:flex;align-items:center;gap:6px}
+.theme-btn:hover{color:var(--text);border-color:var(--border)}
+.nav-cta{background:var(--purple);color:#fff;padding:8px 20px;border-radius:25px;font-size:14px;font-weight:600;text-decoration:none;cursor:pointer;border:none;font-family:'Cairo',sans-serif}
+.nav-cta:hover{opacity:.88}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:15%;left:50%;transform:translateX(-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(108,92,231,0.14) 0%,transparent 70%);pointer-events:none}
+.hero-glow2{position:absolute;bottom:5%;right:8%;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(0,206,201,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-content{position:relative;z-index:1;max-width:740px}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(108,92,231,0.12);border:0.5px solid rgba(108,92,231,0.4);border-radius:25px;padding:6px 16px;font-size:12px;color:var(--purple-light);margin-bottom:28px}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--purple-light);animation:pulseAnim 2s infinite}
+@keyframes pulseAnim{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+.hero h1{font-size:clamp(40px,7vw,80px);font-weight:900;line-height:1.1;margin-bottom:22px;letter-spacing:-1px}
+.hero h1 .accent{color:var(--purple-light)}
+.hero p{font-size:17px;color:var(--text-muted);line-height:1.8;max-width:500px;margin:0 auto 40px}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--purple);color:#fff;padding:14px 30px;border-radius:30px;font-size:15px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;font-family:'Cairo',sans-serif}
+.btn-primary:hover{opacity:.88;transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--text);padding:14px 30px;border-radius:30px;font-size:15px;border:0.5px solid var(--border2);text-decoration:none;display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:'Cairo',sans-serif}
+.btn-ghost:hover{background:var(--card);border-color:var(--border)}
+.hero-stats{display:flex;gap:48px;justify-content:center;margin-top:60px;flex-wrap:wrap}
+.stat .num{font-size:30px;font-weight:700;color:var(--text)}
+.stat .lbl{font-size:12px;color:var(--text-muted);margin-top:3px}
+
+/* SECTIONS */
+.section{padding:90px 24px;max-width:1100px;margin:0 auto}
+.section-label{font-size:11px;font-weight:600;letter-spacing:3px;color:var(--purple-light);text-transform:uppercase;margin-bottom:10px}
+.section-title{font-size:clamp(26px,4vw,42px);font-weight:700;color:var(--text);margin-bottom:14px;line-height:1.2}
+.section-sub{font-size:15px;color:var(--text-muted);line-height:1.75;max-width:520px}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px;margin-top:48px}
+.step-card{background:var(--card);border:0.5px solid var(--border2);border-radius:var(--radius);padding:26px;position:relative;overflow:hidden}
+.step-card:hover{border-color:var(--border)}
+.step-num{font-size:44px;font-weight:900;color:rgba(108,92,231,0.18);line-height:1;margin-bottom:14px}
+.step-icon{width:42px;height:42px;background:var(--purple-dim);border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.step-icon svg{width:21px;height:21px;fill:none;stroke:var(--purple-light);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.step-card h3{font-size:15px;font-weight:600;margin-bottom:7px;color:var(--text)}
+.step-card p{font-size:13px;color:var(--text-muted);line-height:1.6}
+
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border2);border-radius:var(--radius);overflow:hidden;margin-top:48px}
+.feat{background:var(--bg2);padding:32px}
+.feat:hover{background:var(--bg3)}
+.feat-icon{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.feat-icon.p{background:var(--purple-dim)}
+.feat-icon.t{background:var(--teal-dim)}
+.feat-icon svg{width:22px;height:22px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.feat-icon.p svg{stroke:var(--purple-light)}
+.feat-icon.t svg{stroke:var(--teal)}
+.feat h3{font-size:16px;font-weight:600;margin-bottom:7px}
+.feat p{font-size:13px;color:var(--text-muted);line-height:1.65}
+.feat-big{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.chat-bubble{background:var(--purple-dim);border-radius:12px 12px 4px 12px;padding:11px 15px;font-size:13px;color:var(--purple-light);margin-bottom:9px;max-width:88%;line-height:1.5}
+.chat-bubble.ai{background:rgba(0,206,201,0.08);border:0.5px solid rgba(0,206,201,0.2);border-radius:4px 12px 12px 12px;color:var(--teal);margin-right:auto}
+.chat-label{font-size:10px;color:var(--text-muted);margin-bottom:4px}
+.feat-visual{background:var(--bg3);border-radius:var(--radius-sm);padding:22px;border:0.5px solid var(--border2)}
+
+/* POINTS */
+.points-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:44px;justify-content:center}
+.point-card{background:var(--card);border:0.5px solid var(--border2);border-radius:var(--radius);padding:26px 28px;text-align:center;flex:1;min-width:170px}
+.point-card:hover{border-color:var(--border);transform:translateY(-3px)}
+.point-emoji{font-size:34px;margin-bottom:10px}
+.point-card h3{font-size:14px;font-weight:600;margin-bottom:5px}
+.point-card p{font-size:12px;color:var(--text-muted)}
+
+/* CATS */
+.cats{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px}
+.cat-pill{display:flex;align-items:center;gap:7px;background:var(--card);border:0.5px solid var(--border2);border-radius:25px;padding:9px 18px;font-size:14px;color:var(--text-muted);cursor:pointer}
+.cat-pill:hover{background:var(--purple-dim);border-color:var(--purple);color:var(--text)}
+
+/* CTA */
+.cta-section{text-align:center;padding:90px 24px;background:var(--bg2);border-top:0.5px solid var(--border2);border-bottom:0.5px solid var(--border2);position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(108,92,231,0.1) 0%,transparent 70%)}
+.cta-section h2{font-size:clamp(26px,4vw,44px);font-weight:800;margin-bottom:14px;position:relative}
+.cta-section p{font-size:15px;color:var(--text-muted);margin-bottom:32px;position:relative}
+
+/* FOOTER */
+footer{text-align:center;padding:28px;color:var(--text-muted);font-size:13px;border-top:0.5px solid var(--border2)}
+footer span{color:var(--purple-light);font-weight:600}
+
+/* ── LOGIN MODAL ── */
+.modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:24px}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--bg2);border:0.5px solid var(--border);border-radius:24px;padding:40px 36px;width:100%;max-width:420px;position:relative}
+.light .modal-box{background:#fff}
+.modal-close{position:absolute;top:16px;left:16px;background:var(--card);border:0.5px solid var(--border2);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted);font-size:18px}
+.modal-close:hover{color:var(--text)}
+.modal-logo{display:flex;align-items:center;gap:9px;justify-content:center;margin-bottom:28px}
+.modal-logo .ml-icon{width:40px;height:40px;border-radius:12px;background:var(--purple);display:flex;align-items:center;justify-content:center}
+.modal-logo .ml-icon svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round}
+.modal-logo span{font-size:22px;font-weight:700;letter-spacing:4px}
+.modal-tabs{display:flex;background:var(--card);border-radius:12px;padding:4px;margin-bottom:28px;border:0.5px solid var(--border2)}
+.tab-btn{flex:1;padding:9px;border:none;border-radius:9px;background:transparent;color:var(--text-muted);font-size:14px;font-weight:500;cursor:pointer;font-family:'Cairo',sans-serif}
+.tab-btn.active{background:var(--purple);color:#fff}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:13px;color:var(--text-muted);margin-bottom:6px;font-weight:500}
+.form-input{width:100%;padding:12px 16px;border-radius:12px;border:0.5px solid var(--border2);background:var(--card);color:var(--text);font-size:14px;font-family:'Cairo',sans-serif;outline:none}
+.form-input:focus{border-color:var(--purple)}
+.form-submit{width:100%;padding:13px;border-radius:12px;background:var(--purple);color:#fff;font-size:15px;font-weight:600;border:none;cursor:pointer;font-family:'Cairo',sans-serif;margin-top:8px}
+.form-submit:hover{opacity:.88}
+.form-divider{text-align:center;color:var(--text-muted);font-size:12px;margin:16px 0;position:relative}
+.form-divider::before,.form-divider::after{content:'';position:absolute;top:50%;width:42%;height:0.5px;background:var(--border2)}
+.form-divider::before{right:0}.form-divider::after{left:0}
+.modal-switch{text-align:center;font-size:13px;color:var(--text-muted);margin-top:16px}
+.modal-switch span{color:var(--purple-light);cursor:pointer;font-weight:600}
+.success-msg{display:none;text-align:center;padding:20px 0}
+.success-msg .s-icon{font-size:52px;margin-bottom:12px}
+.success-msg h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.success-msg p{font-size:13px;color:var(--text-muted)}
+
+/* ── APP SHELL ── */
+#app-shell{display:none;position:fixed;inset:0;z-index:300;background:var(--bg);flex-direction:column}
+#app-shell.open{display:flex}
+.app-topbar{background:var(--bg2);border-bottom:0.5px solid var(--border2);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.app-topbar .logo-text{font-size:17px;letter-spacing:3px}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.icon-btn{background:var(--card);border:0.5px solid var(--border2);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted)}
+.icon-btn:hover{color:var(--text);border-color:var(--border)}
+.icon-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.app-body{flex:1;overflow:hidden;position:relative}
+.app-screen{position:absolute;inset:0;overflow-y:auto;display:none;padding-bottom:80px}
+.app-screen.active{display:block}
+
+/* APP BOTTOM NAV */
+.app-nav{background:var(--bg2);border-top:0.5px solid var(--border2);display:flex;justify-content:space-around;padding:10px 0 16px;flex-shrink:0}
+.anav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:10px;font-family:'Cairo',sans-serif;padding:4px 16px;border-radius:8px}
+.anav-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.anav-btn.active{color:var(--purple-light)}
+
+/* ── HOME SCREEN ── */
+.home-header{background:var(--bg2);padding:20px;border-bottom:0.5px solid var(--border2)}
+.home-search{background:var(--card);border:0.5px solid var(--border2);border-radius:12px;padding:11px 16px;display:flex;align-items:center;gap:9px;color:var(--text-muted);font-size:14px;cursor:pointer;margin-top:14px}
+.home-search svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;flex-shrink:0}
+.sec-title{font-size:11px;font-weight:600;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;padding:16px 20px 8px}
+.h-cards{display:flex;gap:12px;padding:0 20px 4px;overflow-x:auto;scrollbar-width:none}
+.h-cards::-webkit-scrollbar{display:none}
+.h-card{min-width:140px;background:var(--card);border-radius:14px;padding:14px;border:0.5px solid var(--border2);cursor:pointer;flex-shrink:0}
+.h-card:hover{border-color:var(--border)}
+.hc-icon{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.hc-icon.p{background:var(--purple-dim)} .hc-icon.p svg{stroke:var(--purple-light)}
+.hc-icon.t{background:var(--teal-dim)} .hc-icon.t svg{stroke:var(--teal)}
+.hc-icon.a{background:rgba(253,203,110,0.12)} .hc-icon.a svg{stroke:var(--amber)}
+.hc-icon svg{width:20px;height:20px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.h-card h4{font-size:12px;font-weight:600;color:var(--text);margin-bottom:3px}
+.h-card p{font-size:10px;color:var(--text-muted)}
+.q-card{margin:0 20px 10px;background:var(--card);border-radius:14px;padding:14px;border:0.5px solid var(--border2);cursor:pointer;display:flex;gap:12px;align-items:flex-start}
+.q-card:hover{border-color:var(--border)}
+.q-av{width:36px;height:36px;border-radius:50%;background:var(--purple-dim);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--purple-light);flex-shrink:0}
+.q-body h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.3}
+.q-body p{font-size:11px;color:var(--text-muted)}
+.q-tags{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.qtag{font-size:10px;padding:2px 8px;border-radius:6px;border:0.5px solid var(--border2);color:var(--text-muted)}
+.fab{position:fixed;bottom:90px;left:20px;width:52px;height:52px;background:var(--purple);border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(108,92,231,0.4);z-index:10}
+.fab svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round}
+
+/* ── EXPLORE SCREEN ── */
+.exp-header{padding:18px 20px 12px;background:var(--bg2);border-bottom:0.5px solid var(--border2)}
+.exp-header h2{font-size:18px;font-weight:700;margin-bottom:12px}
+.filters{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.filters::-webkit-scrollbar{display:none}
+.fchip{white-space:nowrap;padding:6px 14px;border-radius:20px;font-size:12px;background:var(--card);border:0.5px solid var(--border2);color:var(--text-muted);cursor:pointer}
+.fchip.active{background:var(--purple-dim);border-color:var(--purple);color:var(--purple-light)}
+.exp-card{margin:12px 20px 0;background:var(--card);border-radius:14px;padding:16px;border:0.5px solid var(--border2)}
+.exp-card:hover{border-color:var(--border)}
+.ec-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ec-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
+.ec-av.p{background:var(--purple-dim);color:var(--purple-light)}
+.ec-av.t{background:var(--teal-dim);color:var(--teal)}
+.ec-av.a{background:rgba(253,203,110,0.12);color:var(--amber)}
+.ec-name{font-size:13px;font-weight:600;color:var(--text)}
+.ec-role{font-size:11px;color:var(--text-muted)}
+.exp-card h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;line-height:1.35}
+.exp-card p{font-size:12px;color:var(--text-muted);line-height:1.55}
+.ec-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:0.5px solid var(--border2)}
+.ec-pts{display:flex;gap:10px}
+.ec-pt{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text-muted)}
+.ec-pt svg{width:13px;height:13px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.read-btn{font-size:12px;color:var(--purple-light);background:none;border:none;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:600}
+
+/* ── ASK SCREEN ── */
+.ask-wrap{padding:20px}
+.ask-wrap h2{font-size:18px;font-weight:700;margin-bottom:6px}
+.ask-wrap .sub{font-size:13px;color:var(--text-muted);margin-bottom:18px;line-height:1.55}
+.ask-textarea{width:100%;padding:14px;border-radius:12px;border:0.5px solid var(--border2);background:var(--card);color:var(--text);font-size:14px;font-family:'Cairo',sans-serif;resize:none;outline:none;min-height:100px;line-height:1.6}
+.ask-textarea:focus{border-color:var(--purple)}
+.ai-box{background:var(--purple-dim);border-radius:12px;padding:14px;margin:14px 0;border:0.5px solid rgba(108,92,231,0.3);display:none}
+.ai-box-head{display:flex;align-items:center;gap:6px;margin-bottom:7px}
+.ai-box-head svg{width:15px;height:15px;fill:none;stroke:var(--purple-light);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ai-box-head span{font-size:12px;font-weight:600;color:var(--purple-light)}
+.ai-box p{font-size:12px;color:#c5b8ff;line-height:1.55}
+.dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--purple-light);animation:blink 1.2s infinite}
+.dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+.cat-btn{padding:10px 6px;border-radius:10px;border:0.5px solid var(--border2);background:var(--card);cursor:pointer;text-align:center;font-family:'Cairo',sans-serif}
+.cat-btn:hover,.cat-btn.sel{border-color:var(--purple);background:var(--purple-dim)}
+.cat-btn:hover svg,.cat-btn.sel svg{stroke:var(--purple-light)}
+.cat-btn:hover span,.cat-btn.sel span{color:var(--purple-light)}
+.cat-btn svg{width:20px;height:20px;fill:none;stroke:var(--text-muted);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;display:block;margin:0 auto 4px}
+.cat-btn span{font-size:10px;color:var(--text-muted)}
+.ask-submit{width:100%;padding:13px;border-radius:12px;background:var(--purple);color:#fff;font-size:15px;font-weight:600;border:none;cursor:pointer;font-family:'Cairo',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px}
+.ask-submit:hover{opacity:.88}
+.ask-submit svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── PROFILE SCREEN ── */
+.profile-header{background:var(--bg2);padding:28px 20px 20px;text-align:center;border-bottom:0.5px solid var(--border2)}
+.pav{width:72px;height:72px;border-radius:50%;background:var(--purple);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:#fff;margin:0 auto 12px;border:3px solid var(--purple-dim)}
+.profile-header h2{font-size:18px;font-weight:700;margin-bottom:3px}
+.profile-header p{font-size:12px;color:var(--text-muted);margin-bottom:10px}
+.level-tag{display:inline-flex;align-items:center;gap:5px;background:var(--purple-dim);border:0.5px solid var(--purple);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--purple-light)}
+.level-tag svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2)}
+.stat-box{background:var(--bg2);padding:16px;text-align:center}
+.stat-box .sn{font-size:20px;font-weight:700}
+.stat-box .sl{font-size:10px;color:var(--text-muted);margin-top:2px}
+.skill-sec{padding:16px 20px}
+.skill-sec h3{font-size:11px;font-weight:600;letter-spacing:1.5px;color:var(--text-muted);text-transform:uppercase;margin-bottom:10px}
+.skill-pill{display:inline-flex;align-items:center;gap:5px;background:var(--card);border:0.5px solid var(--border2);border-radius:20px;padding:6px 12px;font-size:12px;color:var(--text);margin:0 5px 6px 0;cursor:pointer}
+.skill-pill svg{width:13px;height:13px;fill:none;stroke:var(--purple-light);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.skill-pill.learn svg{stroke:var(--teal)}
+.skill-pill.learn{color:var(--teal)}
+.logout-btn{width:calc(100% - 40px);margin:16px 20px;padding:12px;border-radius:12px;background:var(--card);border:0.5px solid var(--border2);color:var(--text-muted);font-size:14px;cursor:pointer;font-family:'Cairo',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px}
+.logout-btn:hover{border-color:rgba(255,100,100,0.3);color:#ff8888}
+.logout-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+@media(max-width:768px){
+  nav{padding:12px 16px}
+  .nav-links{display:none}
+  .features-grid{grid-template-columns:1fr}
+  .feat-big{grid-column:auto;grid-template-columns:1fr}
+  .feat-visual{display:none}
+  .section{padding:60px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ LANDING PAGE ═══════════════════ -->
+<div id="landing">
+
+<nav id="main-nav">
+  <div class="logo" onclick="scrollTo(0,0)">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/><line x1="5.6" y1="5.6" x2="8.5" y2="8.5"/><line x1="15.5" y1="15.5" x2="18.4" y2="18.4"/><line x1="18.4" y1="5.6" x2="15.5" y2="8.5"/><line x1="8.5" y1="15.5" x2="5.6" y2="18.4"/></svg>
+    </div>
+    <span class="logo-text">NEXUS</span>
+  </div>
+  <div class="nav-links">
+    <a onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">كيف يعمل</a>
+    <a onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">المميزات</a>
+    <a onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">الأقسام</a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" onclick="toggleTheme()" id="theme-btn">
+      <svg id="theme-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <span id="theme-label">فاتح</span>
+    </button>
+    <button class="nav-cta" onclick="openLogin()" style="cursor:pointer">ابدأ الآن</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="pulse"></span>الرابط بين عقول البشر</div>
+    <h1><span style="display:block">تعلم من</span><span class="accent">تجارب حقيقية</span></h1>
+    <p>بدل ما تدخل التطبيقات للترفيه، ادخل لتتعلم، تساعد، وتأخذ خبرة من ناس عاشوا نفس تجربتك.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="openLogin()">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+        اكتشف NEXUS
+      </button>
+      <button class="btn-ghost" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">شاهد المميزات</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="num">٢٤٧+</div><div class="lbl">خبرة تُضاف يومياً</div></div>
+      <div class="stat"><div class="num">٧</div><div class="lbl">أقسام متخصصة</div></div>
+      <div class="stat"><div class="num">AI</div><div class="lbl">يلخص التجارب</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW -->
+<section class="section" id="how">
+  <div class="section-label">كيف يعمل</div>
+  <div class="section-title">٤ خطوات بس</div>
+  <p class="section-sub">من أول ما تفتح التطبيق حتى تحصل على إجابة من ناس عاشوا نفس تجربتك.</p>
+  <div class="steps">
+    <div class="step-card">
+      <div class="step-num">١</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+      <h3>اختر اهتماماتك</h3>
+      <p>تختار عمرك وما تعرفه وما تريد تتعلمه. التطبيق يبني تجربتك الخاصة.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">٢</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg></div>
+      <h3>اطرح سؤالك</h3>
+      <p>اكتب سؤالك وNEXUS AI يحلله ويرسله للأشخاص المناسبين.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">٣</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+      <h3>احصل على إجابات</h3>
+      <p>NEXUS AI يجمع الإجابات ويلخصها بشكل واضح ومرتب.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">٤</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <h3>ساعد واربح نقاط</h3>
+      <p>تجاوب على أسئلة تناسب معرفتك وارتفع مستواك.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-label">المميزات</div>
+  <div class="section-title">مش تطبيق عادي</div>
+  <p class="section-sub">كل ميزة مصممة عشان تجعل الخبرة البشرية في متناول الجميع.</p>
+  <div class="features-grid">
+    <div class="feat">
+      <div class="feat-icon p"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h3>اسأل المستقبل ⏳</h3>
+      <p>اكتب "أنا عمري ١٦ وأريد أعرف ماذا أفعل" ويجيبك أشخاص مروا بنفس المرحلة.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon t"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+      <h3>NEXUS AI</h3>
+      <p>يفهم سؤالك، يجد أفضل ناس، ويلخص التجارب. البشر هم البطل وهو الوسيط.</p>
+    </div>
+    <div class="feat feat-big">
+      <div>
+        <div class="feat-icon p"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+        <h3>ملف شخصي فريد</h3>
+        <p style="color:var(--text-muted);font-size:13px;line-height:1.7;margin-bottom:14px">مش مثل إنستغرام. قيمتك بالفائدة اللي قدمتها للناس مش باللايكات.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="background:var(--purple-dim);color:var(--purple-light);padding:4px 13px;border-radius:20px;font-size:12px">برمجة</span>
+          <span style="background:var(--teal-dim);color:var(--teal);padding:4px 13px;border-radius:20px;font-size:12px">✦ أتعلم: لغة</span>
+          <span style="background:rgba(253,203,110,0.1);color:var(--amber);padding:4px 13px;border-radius:20px;font-size:12px">★ خبير نشط</span>
+        </div>
+      </div>
+      <div class="feat-visual">
+        <div class="chat-label">سؤال المستخدم</div>
+        <div class="chat-bubble">كيف أبدأ مشروعاً بدون رأس مال؟</div>
+        <div class="chat-label" style="margin-top:12px">NEXUS AI</div>
+        <div class="chat-bubble ai">وجدت ١٤ شخصاً مروا بنفس تجربتك — أرسل سؤالك إليهم...</div>
+      </div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon p"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <h3>مجتمع حقيقي</h3>
+      <p>ناس حقيقيون بتجارب حقيقية. مش محتوى مصطنع.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon t"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <h3>نظام نقاط ذكي</h3>
+      <p>✨ معرفة &nbsp; 🤝 مساعدة &nbsp; 💡 فكرة. كلما ساعدت أكثر ارتفعت رتبتك.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section" id="categories">
+  <div class="section-label">الأقسام</div>
+  <div class="section-title">كل جانب من حياتك</div>
+  <p class="section-sub">٧ أقسام تغطي كل ما تحتاجه من تجارب وخبرات.</p>
+  <div class="cats">
+    <div class="cat-pill">🧑‍🎓 الدراسة</div>
+    <div class="cat-pill">💼 العمل</div>
+    <div class="cat-pill">💰 المال</div>
+    <div class="cat-pill">🎨 الإبداع</div>
+    <div class="cat-pill">🛠️ المهارات</div>
+    <div class="cat-pill">❤️ الحياة</div>
+    <div class="cat-pill">🌱 تطوير النفس</div>
+  </div>
+</section>
+
+<!-- POINTS -->
+<section class="section" style="text-align:center">
+  <div class="section-label">نظام النقاط</div>
+  <div class="section-title">بدل اللايك، نقاط تأثير</div>
+  <p class="section-sub" style="margin:0 auto">قيمتك مش بعدد متابعيك، بالفائدة اللي قدمتها للناس.</p>
+  <div class="points-row">
+    <div class="point-card"><div class="point-emoji">✨</div><h3>نقطة معرفة</h3><p>لما تشارك خبرة مفيدة</p></div>
+    <div class="point-card"><div class="point-emoji">🤝</div><h3>نقطة مساعدة</h3><p>لما تجاوب بشكل مفيد</p></div>
+    <div class="point-card"><div class="point-emoji">💡</div><h3>نقطة فكرة</h3><p>لما تقدم منظور جديد</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>جاهز تنضم لـ NEXUS؟</h2>
+  <p>آلاف من الناس ينتظرون يتعلمون من تجربتك.</p>
+  <button class="btn-primary" onclick="openLogin()" style="margin:0 auto">
+    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+    ابدأ الآن — مجاناً
+  </button>
+</div>
+
+<footer>
+  تصميم وبرمجة &nbsp;<span>ريتاج فارس الأحمد</span>&nbsp; ♥ &nbsp;|&nbsp; <span>NEXUS</span> — الرابط بين عقول البشر
+</footer>
+
+</div><!-- end landing -->
+
+<!-- ═══════════════════ LOGIN MODAL ═══════════════════ -->
+<div class="modal-overlay" id="login-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeLogin()">×</button>
+    <div class="modal-logo">
+      <div class="ml-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/></svg></div>
+      <span>NEXUS</span>
+    </div>
+
+    <div id="auth-forms">
+      <div class="modal-tabs">
+        <button class="tab-btn active" id="tab-login" onclick="switchTab('login')">تسجيل الدخول</button>
+        <button class="tab-btn" id="tab-signup" onclick="switchTab('signup')">حساب جديد</button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div id="form-login">
+        <div class="form-group">
+          <label>البريد الإلكتروني</label>
+          <input class="form-input" type="email" placeholder="example@email.com" id="login-email">
+        </div>
+        <div class="form-group">
+          <label>كلمة المرور</label>
+          <input class="form-input" type="password" placeholder="••••••••" id="login-pass">
+        </div>
+        <button class="form-submit" onclick="doLogin()">دخول</button>
+        <div class="form-divider">أو</div>
+        <button class="form-submit" style="background:var(--card);color:var(--text);border:0.5px solid var(--border2)" onclick="doLogin()">
+          متابعة كضيف 👤
+        </button>
+      </div>
+
+      <!-- SIGNUP FORM -->
+      <div id="form-signup" style="display:none">
+        <div class="form-group">
+          <label>الاسم الكامل</label>
+          <input class="form-input" type="text" placeholder="اسمك هنا" id="signup-name">
+        </div>
+        <div class="form-group">
+          <label>البريد الإلكتروني</label>
+          <input class="form-input" type="email" placeholder="example@email.com" id="signup-email">
+        </div>
+        <div class="form-group">
+          <label>كلمة المرور</label>
+          <input class="form-input" type="password" placeholder="٨ أحرف على الأقل" id="signup-pass">
+        </div>
+        <button class="form-submit" onclick="doSignup()">إنشاء حساب</button>
+      </div>
+    </div>
+
+    <div class="success-msg" id="success-msg">
+      <div class="s-icon">🎉</div>
+      <h3>أهلاً بك في NEXUS!</h3>
+      <p style="color:var(--text-muted)">جاري تحميل التطبيق...</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ APP SHELL ═══════════════════ -->
+<div id="app-shell">
+  <div class="app-topbar">
+    <div class="logo">
+      <div class="logo-icon" style="width:30px;height:30px;border-radius:8px">
+        <svg viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/></svg>
+      </div>
+      <span class="logo-text">NEXUS</span>
+    </div>
+    <div class="topbar-right">
+      <button class="icon-btn" onclick="toggleTheme()" title="تغيير المظهر">
+        <svg id="app-theme-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <button class="icon-btn">
+        <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="app-body">
+
+    <!-- HOME -->
+    <div class="app-screen active" id="as-home">
+      <div class="home-header">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <p style="font-size:13px;color:var(--text-muted)">مرحباً،</p>
+            <h2 id="user-greeting" style="font-size:18px;font-weight:700">ريتاج 👋</h2>
+          </div>
+          <div style="width:42px;height:42px;border-radius:50%;background:var(--purple);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:16px" id="user-avatar-app">ر</div>
+        </div>
+        <div class="home-search" onclick="switchAppScreen('ask')">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+          ماذا تريد أن تعرف؟
+        </div>
+      </div>
+
+      <div class="sec-title">تجارب تناسبك</div>
+      <div class="h-cards">
+        <div class="h-card">
+          <div class="hc-icon p"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 6v6l4 2"/></svg></div>
+          <h4>تجارب مخصصة</h4><p>بناءً على اهتماماتك</p>
+        </div>
+        <div class="h-card">
+          <div class="hc-icon t"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+          <h4>تعلم اليوم</h4><p>خبرة جديدة كل يوم</p>
+        </div>
+        <div class="h-card">
+          <div class="hc-icon a"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          <h4>الأكثر فائدة</h4><p>٢٤٧ إجابة اليوم</p>
+        </div>
+      </div>
+
+      <div class="sec-title">أسئلة من مجتمعك</div>
+      <div class="q-card">
+        <div class="q-av">أح</div>
+        <div class="q-body">
+          <h4>كيف بدأت تتعلم برمجة وعمرك ٢٥؟</h4>
+          <p>٣ إجابات من أشخاص مروا بنفس التجربة</p>
+          <div class="q-tags"><span class="qtag">برمجة</span><span class="qtag">تطوير النفس</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-av" style="background:var(--teal-dim);color:var(--teal)">سم</div>
+        <div class="q-body">
+          <h4>ما أفضل طريقة لادخار المال مع راتب صغير؟</h4>
+          <p>٥ إجابات · ١.٢ألف مشاهدة</p>
+          <div class="q-tags"><span class="qtag">مال</span><span class="qtag">حياة</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-av" style="background:rgba(253,203,110,0.12);color:var(--amber)">ري</div>
+        <div class="q-body">
+          <h4>⏳ أنا عمري ١٧ وأريد أعرف ماذا أفعل</h4>
+          <p>اسأل المستقبل · ٨ ردود من ناس كانوا مثلك</p>
+          <div class="q-tags"><span class="qtag">مستقبل</span><span class="qtag">شباب</span></div>
+        </div>
+      </div>
+
+      <button class="fab" onclick="switchAppScreen('ask')">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+    </div>
+
+    <!-- EXPLORE -->
+    <div class="app-screen" id="as-explore">
+      <div class="exp-header">
+        <h2>استكشف التجارب</h2>
+        <div class="filters">
+          <div class="fchip active" onclick="setFilter(this)">الكل</div>
+          <div class="fchip" onclick="setFilter(this)">🎓 الدراسة</div>
+          <div class="fchip" onclick="setFilter(this)">💼 العمل</div>
+          <div class="fchip" onclick="setFilter(this)">💰 المال</div>
+          <div class="fchip" onclick="setFilter(this)">🛠️ مهارات</div>
+          <div class="fchip" onclick="setFilter(this)">🌱 تطوير</div>
+        </div>
+      </div>
+      <div class="exp-card">
+        <div class="ec-top">
+          <div class="ec-av p">مح</div>
+          <div><div class="ec-name">محمد الأحمد</div><div class="ec-role">مطور برمجيات · خبير</div></div>
+        </div>
+        <h4>كيف تعلمت برمجة من الصفر في ٦ أشهر</h4>
+        <p>بدأت بلا خلفية تقنية، لكن باتباع خطة واضحة وتطبيق يومي وصلت لأول وظيفة...</p>
+        <div class="ec-foot">
+          <div class="ec-pts">
+            <span class="ec-pt" style="color:var(--amber)"><svg viewBox="0 0 24 24" style="stroke:var(--amber)"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> ٢٤٧</span>
+            <span class="ec-pt" style="color:#D4537E"><svg viewBox="0 0 24 24" style="stroke:#D4537E"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> ٨٩</span>
+          </div>
+          <button class="read-btn">اقرأ التجربة ←</button>
+        </div>
+      </div>
+      <div class="exp-card">
+        <div class="ec-top">
+          <div class="ec-av t">سا</div>
+          <div><div class="ec-name">سارة علي</div><div class="ec-role">مستشارة مالية · متقدم</div></div>
+        </div>
+        <h4>كيف وفّرت ٣٠٪ من راتبي كل شهر</h4>
+        <p>النظام اللي استخدمته بسيط جداً لكن يحتاج انضباطاً. قسمت راتبي إلى ٣ أجزاء...</p>
+        <div class="ec-foot">
+          <div class="ec-pts">
+            <span class="ec-pt" style="color:var(--amber)"><svg viewBox="0 0 24 24" style="stroke:var(--amber)"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> ١٩٢</span>
+            <span class="ec-pt" style="color:#D4537E"><svg viewBox="0 0 24 24" style="stroke:#D4537E"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> ٦٤</span>
+          </div>
+          <button class="read-btn">اقرأ التجربة ←</button>
+        </div>
+      </div>
+      <div class="exp-card">
+        <div class="ec-top">
+          <div class="ec-av a">خا</div>
+          <div><div class="ec-name">خالد منصور</div><div class="ec-role">رائد أعمال · خبير</div></div>
+        </div>
+        <h4>بدأت مشروعي بـ ٥٠٠ ريال وهذا ما حدث</h4>
+        <p>الفكرة كانت بسيطة — حل مشكلة شفتها بنفسي. أول عميل جاءني بعد أسبوعين...</p>
+        <div class="ec-foot">
+          <div class="ec-pts">
+            <span class="ec-pt" style="color:var(--amber)"><svg viewBox="0 0 24 24" style="stroke:var(--amber)"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> ٣١٨</span>
+            <span class="ec-pt" style="color:#D4537E"><svg viewBox="0 0 24 24" style="stroke:#D4537E"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> ١٤٢</span>
+          </div>
+          <button class="read-btn">اقرأ التجربة ←</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ASK -->
+    <div class="app-screen" id="as-ask">
+      <div class="ask-wrap">
+        <h2>اطرح سؤالك</h2>
+        <p class="sub">سيصلك إجابات من أشخاص عاشوا نفس تجربتك، ويلخصها NEXUS AI لك</p>
+        <textarea class="ask-textarea" id="q-input" placeholder="مثال: كيف أبدأ مشروعاً صغيراً بدون رأس مال؟" oninput="handleQ(this)" rows="4"></textarea>
+        <div class="ai-box" id="ai-box">
+          <div class="ai-box-head">
+            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>NEXUS AI يحلل سؤالك...</span>
+          </div>
+          <p id="ai-msg"><span class="dot"></span><span class="dot"></span><span class="dot"></span></p>
+        </div>
+        <div class="sec-title" style="padding:10px 0 8px;font-size:10px">اختر المجال</div>
+        <div class="cat-grid">
+          <div class="cat-btn" onclick="selCat(this)"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><span>الدراسة</span></div>
+          <div class="cat-btn" onclick="selCat(this)"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg><span>العمل</span></div>
+          <div class="cat-btn" onclick="selCat(this)"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg><span>المال</span></div>
+          <div class="cat-btn" onclick="selCat(this)"><svg viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg><span>الإبداع</span></div>
+          <div class="cat-btn" onclick="selCat(this)"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg><span>مهارات</span></div>
+          <div class="cat-btn" onclick="selCat(this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg><span>الحياة</span></div>
+        </div>
+        <button class="ask-submit" onclick="submitQ()">
+          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          أرسل للمجتمع
+        </button>
+      </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="app-screen" id="as-profile">
+      <div class="profile-header">
+        <div class="pav" id="profile-av">ر</div>
+        <h2 id="profile-name">ريتاج فارس الأحمد</h2>
+        <p>مشترك منذ يناير ٢٠٢٥</p>
+        <div class="level-tag">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          مساهم نشط
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box"><div class="sn" style="color:var(--purple-light)">٤٧</div><div class="sl">نقطة معرفة</div></div>
+        <div class="stat-box"><div class="sn" style="color:var(--teal)">٢٣</div><div class="sl">نقطة مساعدة</div></div>
+        <div class="stat-box"><div class="sn" style="color:var(--amber)">١٢</div><div class="sl">نقطة فكرة</div></div>
+      </div>
+      <div class="skill-sec">
+        <h3>أعرف</h3>
+        <span class="skill-pill"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>برمجة</span>
+        <span class="skill-pill"><svg viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>طبخ</span>
+        <span class="skill-pill"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>رياضة</span>
+        <span class="skill-pill"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>تصوير</span>
+      </div>
+      <div class="skill-sec" style="padding-top:0">
+        <h3>أتعلم</h3>
+        <span class="skill-pill learn"><svg viewBox="0 0 24 24"><path d="M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/></svg>لغة انجليزية</span>
+        <span class="skill-pill learn"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>تجارة</span>
+        <span class="skill-pill learn"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>استثمار</span>
+      </div>
+      <button class="logout-btn" onclick="doLogout()">
+        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        تسجيل الخروج
+      </button>
+    </div>
+
+  </div><!-- app-body -->
+
+  <div class="app-nav">
+    <button class="anav-btn active" id="nav-home" onclick="switchAppScreen('home')">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      الرئيسية
+    </button>
+    <button class="anav-btn" id="nav-explore" onclick="switchAppScreen('explore')">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+      استكشف
+    </button>
+    <button class="anav-btn" id="nav-ask" onclick="switchAppScreen('ask')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      اسأل
+    </button>
+    <button class="anav-btn" id="nav-profile" onclick="switchAppScreen('profile')">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      ملفي
+    </button>
+  </div>
+</div><!-- app-shell -->
+
+<script>
+// ── THEME ──
+let dark=true;
+function toggleTheme(){
+  dark=!dark;
+  document.body.classList.toggle('light',!dark);
+  const sun='<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+  const moon='<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
+  const ti=document.getElementById('theme-icon');
+  const ati=document.getElementById('app-theme-icon');
+  const tl=document.getElementById('theme-label');
+  if(ti){ti.innerHTML=dark?sun:moon}
+  if(ati){ati.innerHTML=dark?sun:moon}
+  if(tl){tl.textContent=dark?'فاتح':'داكن'}
+  document.querySelectorAll('.nav-bg').forEach(n=>{
+    n.style.background=dark?'rgba(7,7,15,0.88)':'rgba(244,243,255,0.92)';
+  });
+}
+
+// ── LOGIN ──
+function openLogin(){document.getElementById('login-modal').classList.add('open')}
+function closeLogin(){document.getElementById('login-modal').classList.remove('open')}
+function switchTab(t){
+  document.getElementById('tab-login').classList.toggle('active',t==='login');
+  document.getElementById('tab-signup').classList.toggle('active',t==='signup');
+  document.getElementById('form-login').style.display=t==='login'?'block':'none';
+  document.getElementById('form-signup').style.display=t==='signup'?'block':'none';
+}
+function doLogin(){
+  const em=document.getElementById('login-email').value;
+  const name=em?em.split('@')[0]:'ضيف';
+  enterApp(name);
+}
+function doSignup(){
+  const name=document.getElementById('signup-name').value||'مستخدم جديد';
+  enterApp(name);
+}
+function enterApp(name){
+  document.getElementById('auth-forms').style.display='none';
+  document.getElementById('success-msg').style.display='block';
+  const first=name.charAt(0).toUpperCase();
+  setTimeout(()=>{
+    closeLogin();
+    document.getElementById('landing').style.display='none';
+    document.getElementById('app-shell').classList.add('open');
+    document.getElementById('user-greeting').textContent=name+' 👋';
+    document.getElementById('user-avatar-app').textContent=first;
+    document.getElementById('profile-av').textContent=first;
+    document.getElementById('profile-name').textContent=name;
+    document.getElementById('auth-forms').style.display='block';
+    document.getElementById('success-msg').style.display='none';
+  },1600);
+}
+function doLogout(){
+  document.getElementById('app-shell').classList.remove('open');
+  document.getElementById('landing').style.display='block';
+}
+
+// ── APP SCREENS ──
+function switchAppScreen(name){
+  document.querySelectorAll('.app-screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('as-'+name).classList.add('active');
+  ['home','explore','ask','profile'].forEach(n=>{
+    document.getElementById('nav-'+n).classList.toggle('active',n===name);
+  });
+}
+
+// ── EXPLORE FILTERS ──
+function setFilter(el){
+  document.querySelectorAll('.fchip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ── ASK AI ──
+let aiTimer=null,aiIdx=0;
+const aiMsgs=[
+  'وجدت ١٢ شخصاً لديهم خبرة في هذا المجال...',
+  'أرسلت سؤالك لـ ٨ أشخاص مروا بنفس التجربة',
+  'هذا السؤال يناسب أقسام: العمل، التطوير، المهارات'
+];
+function handleQ(el){
+  const box=document.getElementById('ai-box');
+  const msg=document.getElementById('ai-msg');
+  clearTimeout(aiTimer);
+  if(el.value.length>10){
+    box.style.display='block';
+    msg.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+    aiTimer=setTimeout(()=>{msg.textContent=aiMsgs[aiIdx%3];aiIdx++;},1800);
+  }else{box.style.display='none'}
+}
+function selCat(el){
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function submitQ(){
+  const q=document.getElementById('q-input').value.trim();
+  if(!q){
+    document.getElementById('q-input').style.borderColor='#ff6b6b';
+    setTimeout(()=>document.getElementById('q-input').style.borderColor='',1500);
+    return;
+  }
+  document.getElementById('q-input').value='';
+  document.getElementById('ai-box').style.display='none';
+  switchAppScreen('home');
+  setTimeout(()=>{
+    const card=document.createElement('div');
+    card.className='q-card';
+    card.style.borderColor='var(--purple)';
+    card.innerHTML=`<div class="q-av" style="background:var(--purple)">أن</div><div class="q-body"><h4>${q}</h4><p>سؤالك — ينتظر إجابات...</p><div class="q-tags"><span class="qtag">جديد</span></div></div>`;
+    document.querySelector('#as-home .q-card').insertAdjacentElement('beforebegin',card);
+  },300);
+}
+
+// ── CLOSE MODAL ON OUTSIDE CLICK ──
+document.getElementById('login-modal').addEventListener('click',function(e){
+  if(e.target===this)closeLogin();
+});
+</script>
+</body>
+</html>
